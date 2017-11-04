@@ -61,4 +61,12 @@ public class CompareCmd extends ImageCommand {
       setCommand("compare");
     }
   }
+  public  CompareCmd(String strPrimary) {
+    super();
+    if (strPrimary != null) {
+      setCommand(strPrimary, "compare");
+    } else {
+      setCommand("compare");
+    }
+  }   
 }

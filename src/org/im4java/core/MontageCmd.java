@@ -66,4 +66,12 @@ public class MontageCmd extends ImageCommand {
       setCommand("montage");
     }
   }
+  public  MontageCmd(String strPrimary) {
+    super();
+    if (strPrimary != null) {
+      setCommand(strPrimary, "montage");
+    } else {
+      setCommand("montage");
+    }
+  }  
 }

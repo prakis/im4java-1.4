@@ -66,4 +66,12 @@ public class MogrifyCmd extends ImageCommand {
       setCommand("mogrify");
     }
   }
+  public  MogrifyCmd(String strPrimary) {
+    super();
+    if (strPrimary != null) {
+      setCommand(strPrimary, "mogrify");
+    } else {
+      setCommand("mogrify");
+    }
+  }  
 }

@@ -62,4 +62,13 @@ public class CompositeCmd extends ImageCommand {
       setCommand("composite");
     }
   }
+  
+    public  CompositeCmd(String strPrimary) {
+    super();
+    if (strPrimary != null) {
+      setCommand(strPrimary, "composite");
+    } else {
+      setCommand("composite");
+    }
+  }
 }

@@ -69,4 +69,13 @@ public class IdentifyCmd extends ImageCommand {
       setCommand("identify");
     }
   }
+  
+  public  IdentifyCmd(String strPrimary) {
+    super();
+    if (strPrimary != null) {
+      setCommand(strPrimary,"identify");
+    } else {
+      setCommand("identify");
+    }
+  }  
 }

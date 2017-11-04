@@ -50,4 +50,8 @@ public class ImageMagickCmd extends ImageCommand {
       setCommand("gm",pCommand);
     }
   }
+  public  ImageMagickCmd(String strPrimary, boolean dummy) {
+    super();
+      setCommand(strPrimary, "convert");
+  }  
 }

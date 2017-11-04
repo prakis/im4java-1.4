@@ -66,7 +66,15 @@ public class DisplayCmd extends ImageCommand {
       }
     }
   }
-
+  public  DisplayCmd(String strPrimary) {
+    super();
+      if (System.getProperty("os.name").startsWith("Windows")) {
+	setCommand(strPrimary, "imdisplay");
+      } else {
+	setCommand(strPrimary, "display");
+      }
+    
+  }
   //////////////////////////////////////////////////////////////////////////////
 
   /**

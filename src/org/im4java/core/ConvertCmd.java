@@ -62,4 +62,12 @@ public class ConvertCmd extends ImageCommand {
       setCommand("convert");
     }
   }
+  public  ConvertCmd(String strPrimary) {
+    super();
+    if (strPrimary != null) {
+      setCommand(strPrimary, "convert");
+    } else {
+      setCommand("convert");
+    }
+  }  
 }
