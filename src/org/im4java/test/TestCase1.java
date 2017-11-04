@@ -20,7 +20,10 @@
 /**************************************************************************/
 
 package org.im4java.test;
+import java.util.ArrayList;
 import org.im4java.core.*;
+import org.im4java.process.ArrayListOutputConsumer;
+import org.im4java.process.ProcessStarter;
 
 /**
    This class implements the basic test of convert.
@@ -60,8 +63,37 @@ public class TestCase1 extends AbstractTestCase {
   /**
      Run the test.
   */
-
   public void run() throws Exception {
+
+        ProcessStarter.setGlobalSearchPath("/usr/local/bin/");
+        //ProcessStarter.setGlobalSearchPath("/usr/local/Cellar/imagemagick/7.0.7-9/bin/");
+      
+      System.out.println("----1----");
+      
+        IdentifyCmd identify = new IdentifyCmd("magick");
+        IMOperation op = new IMOperation();
+        //op.addImage(filedata.getOriginalFilePath());
+        //op.verbose();
+        //op.addImage(1);
+        op.addImage("/Users/karthik/Downloads/test/a.jpg");
+        op.addRawArgs("-format", "%Q");
+        //op.format("%Q");
+        ArrayListOutputConsumer output = new ArrayListOutputConsumer();
+        identify.setOutputConsumer(output);
+        //identify.setCommand("-format %Q ");
+
+        identify.createScript("magick-magickAssumedQuality-2.sh.txt", op);
+        //identify.run(op, filedata.getOriginalFilePathForMagick());
+        identify.run(op);
+
+        ArrayList<String> cmdOutput = output.getOutput();
+        //String qual = "100"; // default to max
+        for (String line : cmdOutput) {
+            System.out.println("------%-->"+line+"<--");
+            //qual = line;
+        }    
+  }
+  public void run1() throws Exception {
     System.err.println(" 1. Testing convert ...");
  
     // setup optional control-variables
