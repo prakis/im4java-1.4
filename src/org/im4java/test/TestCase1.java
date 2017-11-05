@@ -20,6 +20,7 @@
 /**************************************************************************/
 
 package org.im4java.test;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import org.im4java.core.*;
 import org.im4java.process.ArrayListOutputConsumer;
@@ -38,6 +39,7 @@ public class TestCase1 extends AbstractTestCase {
 
   //////////////////////////////////////////////////////////////////////////////
 
+    public String filepath = "/Users/karthik/Downloads/test/a.jpg";
   /**
      Return the description of the test.
   */
@@ -63,19 +65,46 @@ public class TestCase1 extends AbstractTestCase {
   /**
      Run the test.
   */
-  public void run() throws Exception {
+  public void run() { // BufferedImage
+        initPath();
+        IMOperation op = new IMOperation();
+        op.addImage(filepath);
 
+        //op.quality(newQ);        
+        //op.resize(100);
+
+        op.addImage("jpg:-");
+        Stream2BufferedImage s2b = new Stream2BufferedImage();
+
+        ConvertCmd convert = new ConvertCmd("magick");
+        convert.setOutputConsumer(s2b);
+        try {
+            convert.createScript("magick-createBufferedImage.sh.txt", op);
+            //System.out.println(givenPercentageInt + "<--<");
+            convert.run(op);
+        } catch (Exception e) {
+            System.out.println(filepath);            
+            e.printStackTrace();
+        }
+        BufferedImage img = s2b.getImage();
+        System.out.println("BufferedImage wxh = "+img.getWidth() + "x"+ img.getHeight());
+  }
+  private void initPath(){
         ProcessStarter.setGlobalSearchPath("/usr/local/bin/");
         //ProcessStarter.setGlobalSearchPath("/usr/local/Cellar/imagemagick/7.0.7-9/bin/");
       
-      System.out.println("----1----");
+      System.out.println("----4----");      
+  }
+  public void runIdentify() throws Exception {
+
+        initPath();
       
         IdentifyCmd identify = new IdentifyCmd("magick");
         IMOperation op = new IMOperation();
         //op.addImage(filedata.getOriginalFilePath());
         //op.verbose();
         //op.addImage(1);
-        op.addImage("/Users/karthik/Downloads/test/a.jpg");
+        op.addImage(filepath);
         op.addRawArgs("-format", "%Q");
         //op.format("%Q");
         ArrayListOutputConsumer output = new ArrayListOutputConsumer();
@@ -93,7 +122,7 @@ public class TestCase1 extends AbstractTestCase {
             //qual = line;
         }    
   }
-  public void run1() throws Exception {
+  public void runOriginal() throws Exception {
     System.err.println(" 1. Testing convert ...");
  
     // setup optional control-variables
